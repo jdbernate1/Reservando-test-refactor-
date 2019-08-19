@@ -16,15 +16,30 @@ Listado.prototype.calificarRestaurant = function(id, calificacion) {
     restaurant.calificar(calificacion);
 }
 
+
 //Dado un id, busca el objeto del listado que tiene ese id
 Listado.prototype.buscarRestaurante = function(id) {
-    for (var i = 0; i < this.restaurantes.length; i++) {
-        if (this.restaurantes[i].id === id) {
-            return this.restaurantes[i]
-        }
+    // var filtrado = this.restaurantes.find(function(rest){
+    //     return rest.id === id;
+    // });
+    // if(filtrado>0){
+    //     filtrado[0];
+    // }
+    // return "No se ha encontrado ningún restaurant";   
+    var restaurantSeleccionado = this.restaurantes.filter(restaurant => restaurant.id == id)
+
+    if (restaurantSeleccionado.length > 0){
+        return restaurantSeleccionado[0];
     }
     return "No se ha encontrado ningún restaurant";
 }
+    // for (var i = 0; i < this.restaurantes.length; i++) {
+    //     if (this.restaurantes[i].id === id) {
+    //         return this.restaurantes[i]
+    //     }
+    // }
+    // return "No se ha encontrado ningún restaurant";
+//}
 
 //Funcion creada para modularizar la eliminación de duplicados de listas
 var eliminarDuplicadosLista = function(listado) {
@@ -79,21 +94,20 @@ Listado.prototype.obtenerHorarios = function() {
     var horarios = [];
     //Recorremos el array de restaurantes y vamos agregando todos los array de horarios
     this.restaurantes.map(function(rest){
-        arregloHorarios.push(rest.horarios).map(function(hor){
-            horarios.push(hor)
-        })
+        arregloHorarios.push(rest.horarios)
     });
+
 
     // for (var i = 0; i < this.restaurantes.length; i++) {
     //     arregloHorarios.push(this.restaurantes[i].horarios);
     // }
 
     // //En este arreglo vamos a poner todos los horarios, uno por uno
-    // arregloHorarios.forEach(function(a) {
-    //     a.forEach(function(hor) {
-    //         horarios.push(hor)
-    //     });
-    // });
+    arregloHorarios.forEach(function(a) {
+        a.forEach(function(hor) {
+            horarios.push(hor)
+        });
+    });
 
     //En este arreglo vamos a poner todos los horarios pero sin repetidos
     var horariosSinDuplicados =eliminarDuplicadosLista(horarios);

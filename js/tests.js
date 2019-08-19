@@ -115,3 +115,49 @@ describe('Testeo obtenerRestaurante() ', function(){
     });
 
 })
+
+describe('Creacion Reservas ', function(){
+    it('Al crear una reserva, la fecha es asignada de manera adecuada', function(){
+        var fecha = new Date(2018, 7, 24, 11, 00);
+        var reserva = new Reserva (fecha, 8, 350, "DES1")
+        expect(reserva.horario).eql(fecha);        
+    });
+    it('Al crear una reserva, la cant de personas es asignada de manera adecuada', function(){
+        var fecha = new Date(2018, 7, 24, 11, 00);
+        var reserva = new Reserva (fecha, 8, 350, "DES1")
+        expect(reserva.cantidadPersonas).to.equal(8);       
+    });
+    it('Al crear una reserva, el precio por persona es asignado de manera adecuada', function(){
+        var fecha = new Date(2018, 7, 24, 11, 00);
+        var reserva = new Reserva (fecha, 8, 350, "DES1")
+        expect(reserva.precioXpersona).to.equal(350);       
+    });
+    it('Al crear una reserva, el codigo de descuento es asignado de manera adecuada', function(){
+        var fecha = new Date(2018, 7, 24, 11, 00);
+        var reserva = new Reserva (fecha, 8, 350, "DES1")
+        expect(reserva.codigoDescuento ).to.equal("DES1");        
+    });
+})
+
+describe('Testeo Funciones de Reservas ', function(){
+    it('Al crear una reserva, calcula el precio base adecuado', function(){
+        var fecha = new Date(2018, 7, 24, 11, 00);
+        var reserva = new Reserva (fecha, 8, 350, "DES1")
+        expect(reserva.calcularPrecioBase()).to.equal(2800);        
+    });
+    it('Al crear una reserva, calcula los adicionales correctamente', function(){
+        var fecha = new Date(2018, 7, 24, 13, 00);
+        var reserva = new Reserva (fecha, 8, 350, "DES1")
+        expect(reserva.calcularAdicionales()).to.equal(420);        
+    });
+    it('Al crear una reserva, calcula los descuentos correctamente', function(){
+        var fecha = new Date(2018, 7, 24, 11, 00);
+        var reserva = new Reserva (fecha, 8, 350, "DES1")
+        expect(reserva.calcularDescuentos()).to.equal(630);        
+    });
+    it('Al crear una reserva, calcula el precio total adecuado', function(){
+        var fecha = new Date(2018, 7, 24, 11, 00);
+        var reserva = new Reserva (fecha, 8, 350, "DES1")
+        expect(reserva.calcularPrecioFinal()).to.equal(2450)
+    })
+});
